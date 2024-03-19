@@ -69,12 +69,6 @@ def camera_matrix():
     """
     ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
     img = cv2.imread('cherckerboard 2/GOPR0092.JPG')
-    h,  w = img.shape[:2]
     newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx, dist, (w,h), 1, (w,h))
-    #print("dist : \n")
-    #print(dist)
-    #print("rvecs : \n")
-    #print(rvecs)
-    #print("tvecs : \n")
-    #print(tvecs)
+
     return mtx, newcameramtx, dist, w, h
