@@ -1,4 +1,4 @@
-def camera_matrix(path):
+def camera_matrix():
     import os
     import glob
     # Defining the dimensions of checkerboard
@@ -16,7 +16,7 @@ def camera_matrix(path):
     prev_img_shape = None
 
     # Extracting path of individual image stored in a given directory
-    images = glob.glob(path+'*.JPG')
+    images = glob.glob('cherckerboard 2/*.JPG')
 
     for fname in images:
         try:
@@ -66,12 +66,13 @@ def camera_matrix(path):
     detected corners (imgpoints)
     """
     ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
-    
-    print("Camera matrix : \n")
-    print(mtx)
+    img = cv2.imread('cherckerboard 2/GOPR0092.JPG')
+    h,  w = img.shape[:2]
+    newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx, dist, (w,h), 1, (w,h))
     #print("dist : \n")
     #print(dist)
     #print("rvecs : \n")
     #print(rvecs)
     #print("tvecs : \n")
     #print(tvecs)
+    return mtx, newcameramtx, dist, w, h
