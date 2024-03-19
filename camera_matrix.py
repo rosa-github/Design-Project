@@ -1,6 +1,8 @@
 def camera_matrix():
     import os
     import glob
+    import cv2
+    import numpy as np
     # Defining the dimensions of checkerboard
     CHECKERBOARD = (6,9)
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
@@ -47,8 +49,8 @@ def camera_matrix():
                 cv2.resizeWindow('img', 800, 600)  # Set the window size to 800x600 pixels
 
 
-                cv2.imshow('img', img)
-                cv2.waitKey(500)  # Display the image for 0.5 seconds
+                #cv2.imshow('img', img)
+                #cv2.waitKey(500)  # Display the image for 0.5 seconds
         except Exception as e:
             print("Error processing image {}: {}".format(fname, e))
             continue
