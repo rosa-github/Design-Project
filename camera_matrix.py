@@ -71,4 +71,4 @@ def camera_matrix():
     img = cv2.imread('cherckerboard 2/GOPR0092.JPG')
     newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx, dist, (w,h), 1, (w,h))
 
-    return mtx, newcameramtx, dist, w, h
+    return mtx, newcameramtx, dist, w, h, objpoints, rvecs, tvecs, imgpoints
