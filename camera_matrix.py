@@ -18,7 +18,7 @@ def camera_matrix():
     prev_img_shape = None
 
     # Extracting path of individual image stored in a given directory
-    images = glob.glob('cherckerboard 2/*.JPG')
+    images = glob.glob('checkerboard/*.JPG')
 
     for fname in images:
         try:
@@ -49,17 +49,13 @@ def camera_matrix():
                 cv2.resizeWindow('img', 800, 600)  # Set the window size to 800x600 pixels
 
 
-                #cv2.imshow('img', img)
-                #cv2.waitKey(500)  # Display the image for 0.5 seconds
+                cv2.imshow('img', img)
+                cv2.waitKey(500)  # Display the image for 0.5 seconds
         except Exception as e:
             print("Error processing image {}: {}".format(fname, e))
             continue
             
     cv2.destroyAllWindows()
-
-    # Calculate the image size
-    h, w = img.shape[:2]
-
 
     """
     Performing camera calibration by 
@@ -68,7 +64,8 @@ def camera_matrix():
     detected corners (imgpoints)
     """
     ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
-    img = cv2.imread('cherckerboard 2/GOPR0092.JPG')
+    img = cv2.imread('checkerboard/GPTempDownload.JPG')
+    h, w = img.shape[:2]
     newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx, dist, (w,h), 1, (w,h))
 
     return mtx, newcameramtx, dist, w, h, objpoints, rvecs, tvecs, imgpoints
